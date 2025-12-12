@@ -131,6 +131,7 @@ body::before {
 }
 .healing-overlay.active {
   opacity: 1;
+  pointer-events: auto;
 }
 .healing-content {
   text-align: center;
