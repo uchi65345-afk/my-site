@@ -2,13 +2,16 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>うっちーの自己紹介</title>
+  <title>Nova Vista | 想像を超える一枚</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      color-scheme: light;
-      font-family: "Noto Sans JP", "Helvetica Neue", sans-serif;
-      background-color: #f4f4f7;
+      color: #edf2fb;
+      background-color: #020617;
+      font-family: "Space Grotesk", "Zen Kaku Gothic New", system-ui, sans-serif;
     }
     * {
       box-sizing: border-box;
@@ -16,104 +19,225 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: radial-gradient(circle at top, #ffffff, #f4f4f7 55%);
-      color: #1d1d20;
+      background: radial-gradient(circle at top, rgba(156, 165, 196, 0.25), transparent 45%),
+                  radial-gradient(circle at 20% 20%, rgba(236, 72, 153, 0.3), transparent 25%),
+                  #020617;
+      color: #edf2fb;
       display: flex;
+      align-items: stretch;
       justify-content: center;
-      padding: 2rem;
+      padding: clamp(1.5rem, 3vw, 3rem);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(79, 70, 229, 0.25), rgba(14, 165, 233, 0.15));
+      filter: blur(120px);
+      opacity: 0.6;
+      z-index: -2;
+      animation: pulse 12s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+      100% { transform: scale(1); opacity: 0.6; }
     }
     .page {
-      width: min(960px, 100%);
-      background: #fff;
-      border-radius: 24px;
-      box-shadow: 0 30px 45px rgba(15, 23, 42, 0.18);
-      padding: clamp(2rem, 4vw, 3rem);
-      display: grid;
-      gap: 2rem;
+      width: min(1000px, 100%);
+      background: rgba(4, 8, 20, 0.85);
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: clamp(2rem, 3vw, 3.5rem);
+      box-shadow: 0 30px 60px rgba(2, 6, 23, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+    .page::after {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.25), transparent 70%);
+      bottom: -80px;
+      right: -60px;
+      filter: blur(8px);
+      z-index: -1;
+      animation: float 9s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+    .orb {
+      position: fixed;
+      pointer-events: none;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(248, 250, 252, 0.6), rgba(14, 165, 233, 0));
+      border-radius: 50%;
+      filter: blur(1px);
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease;
+      opacity: 0;
+      mix-blend-mode: screen;
+      z-index: 1;
     }
     header {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 1rem;
     }
-    .badge {
-      align-self: flex-start;
-      font-size: 0.85rem;
-      letter-spacing: 0.3em;
+    .eyebrow {
+      letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: #6b7280;
+      font-size: 0.75rem;
+      color: rgba(237, 242, 251, 0.7);
     }
     h1 {
       margin: 0;
-      font-size: clamp(2rem, 4vw, 3rem);
-      letter-spacing: -0.02em;
+      font-size: clamp(2.6rem, 4vw, 4rem);
+      line-height: 1.2;
+      letter-spacing: -0.03em;
     }
-    h2 {
-      margin: 0 0 0.35rem;
+    .hero-subtitle {
+      color: rgba(237, 242, 251, 0.7);
       font-size: 1.1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: #6b7280;
+      max-width: 60ch;
     }
-    p {
-      margin: 0;
-      line-height: 1.7;
-      color: #3c3c44;
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
     }
-    .accent {
-      color: #0b7285;
+    .btn {
+      border-radius: 999px;
+      padding: 0.95rem 2.3rem;
       font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .lede {
-      font-size: 1.1rem;
-      font-weight: 500;
+    .btn.primary {
+      background: linear-gradient(135deg, #a855f7, #38bdf8);
+      color: #fff;
+      box-shadow: 0 15px 30px rgba(56, 189, 248, 0.3);
+    }
+    .btn.secondary {
+      background: transparent;
+      color: #e0e7ff;
+      border: 1px solid rgba(224, 231, 255, 0.5);
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.9rem;
+      padding: 0.45rem 0.9rem;
+      background: rgba(226, 232, 240, 0.08);
+      border-radius: 999px;
+      border: 1px solid rgba(226, 232, 240, 0.2);
+    }
+    .status-pill span {
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 50%;
+      display: inline-block;
+      background: #34d399;
+      box-shadow: 0 0 10px rgba(52, 211, 153, 0.8);
     }
     .grid {
       display: grid;
       gap: 1.5rem;
+    }
+    .feature-grid {
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
-    .card {
-      padding: 1.4rem;
-      border-radius: 18px;
-      background: #f8fafc;
-      border: 1px solid #e5e7eb;
-      transition: border-color 0.2s ease;
+    .feature {
+      background: rgba(15, 23, 42, 0.75);
+      border-radius: 24px;
+      padding: 1.6rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      min-height: 200px;
+      position: relative;
+      overflow: hidden;
     }
-    .card:hover {
-      border-color: #0b7285;
+    .feature::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(56, 189, 248, 0.15));
+      pointer-events: none;
     }
-    .section-title {
-      font-weight: 700;
+    .feature h3 {
+      margin-top: 0;
       margin-bottom: 0.6rem;
+      font-size: 1.1rem;
     }
-    .list {
+    .feature p {
+      color: rgba(226, 232, 240, 0.7);
+      line-height: 1.6;
+    }
+    .timeline {
+      display: grid;
+      gap: 1rem;
+    }
+    .timeline-item {
       display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      margin: 0;
-      padding: 0;
-      list-style: none;
+      gap: 1.2rem;
+      align-items: flex-start;
+      padding: 1.3rem;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(148, 163, 184, 0.2);
     }
-    .list span {
-      color: #52525b;
-    }
-    footer {
-      border-top: 1px solid #e5e7eb;
-      padding-top: 1rem;
-      text-align: right;
-      color: #9ca3af;
+    .timeline-item span {
       font-size: 0.85rem;
+      color: rgba(226, 232, 240, 0.6);
     }
-    @media (max-width: 600px) {
+    .timeline-badge {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      background: linear-gradient(160deg, rgba(79, 70, 229, 0.4), rgba(14, 165, 233, 0.45));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: #fff;
+    }
+    .cta {
+      margin-top: 2rem;
+      padding: 2rem;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.25), rgba(14, 165, 233, 0.2));
+      border: 1px solid rgba(79, 70, 229, 0.4);
+    }
+    .cta h2 {
+      margin: 0 0 0.6rem;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+    }
+    .cta p {
+      margin: 0 0 1rem;
+      color: rgba(237, 242, 251, 0.75);
+    }
+    @media (max-width: 640px) {
       body {
-        padding: 1.5rem;
+        padding: 1rem;
       }
-      .page {
-        padding: 1.5rem;
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
       }
-      footer {
-        text-align: left;
+      .feature {
+        padding: 1.2rem;
       }
     }
   </style>
@@ -121,42 +245,85 @@
 <body>
   <div class="page">
     <header>
-      <div class="badge">Portrait</div>
-      <h1>うっちー</h1>
-      <p class="lede">シンプルだけどめちゃくちゃおしゃれ。感覚を大事にする日常を。</p>
+      <div class="eyebrow">Nova Vista</div>
+      <h1>Tomorrow’s showcase, crafted tonight.</h1>
+      <p class="hero-subtitle">光と影の狭間を旅するインタラクティブなスペース。唯一無二の世界観を、スクロールするたびに感じてください。</p>
+      <div class="hero-actions">
+        <button class="btn primary">体験を始める</button>
+        <button class="btn secondary">コンセプトを見る</button>
+        <div class="status-pill">
+          <span></span> ライブアップデート中
+        </div>
+      </div>
     </header>
 
-    <section class="grid">
-      <article class="card">
-        <div class="section-title">About</div>
-        <p>言葉では飾らず、心地よさを優先したライフスタイルを追求。今は身の回りのシンプルなことに目を向けながら、新しい考え方や表現を取り入れているところです。</p>
+    <section class="grid feature-grid" style="margin-top: 2rem;">
+      <article class="feature">
+        <h3>Immersive Narratives</h3>
+        <p>視点が自然に巡るストーリーライン。光の粒子が時間を刻みながら、あなたを次のパートへと誘います。</p>
       </article>
-      <article class="card">
-        <div class="section-title">Favorite Mood</div>
-        <p>軽やかな色合い、柔らかな光、そして静寂の中にある小さなリズム。そんな瞬間を集めた空間が好きです。</p>
+      <article class="feature">
+        <h3>Sound + Light</h3>
+        <p>暖かな低音とクリスタルなシンセがリズムを刻む。グラデーションと連動するサウンドスケープで、全身が軽く震える感覚を。</p>
       </article>
-    </section>
-
-    <section>
-      <div class="section-title">Hobbies</div>
-      <ul class="list">
-        <li><strong class="accent">散歩</strong><span> 何気ない道を歩きながら、季節の匂いや風の動きを感じる時間が至福。</span></li>
-        <li><strong class="accent">音に包まれる</strong><span> 心地よいサウンドをBGMに、書き物やアイデアを広げるのが好きです。</span></li>
-      </ul>
-    </section>
-
-    <section class="grid">
-      <article class="card">
-        <div class="section-title">Style Philosophy</div>
-        <p>必要なものだけを厳選し、余白をつくる。着るもの・身の回りのものから、時間の使い方まで、一貫した「静かな贅沢」を大切にしています。</p>
-      </article>
-      <article class="card">
-        <div class="section-title">Now</div>
-        <p>街を歩きながらインスピレーションを探し、心が躍る瞬間を集めつつ、次に届ける何かを思い描いています。</p>
+      <article class="feature">
+        <h3>Responsive Layers</h3>
+        <p>マウスの動きやスクロールにシームレスに反応するレイヤー。微細な変化が、ただの閲覧を儀式的な体験へ変える。</p>
       </article>
     </section>
 
-    <footer>うっちーの自己紹介ページ</footer>
+    <section style="margin-top: 2.5rem;">
+      <div class="grid timeline">
+        <div class="timeline-item">
+          <div class="timeline-badge">01</div>
+          <div>
+            <span>01 / 2025</span>
+            <h3 style="margin: 0.2rem 0;">Origin Field</h3>
+            <p>街のノイズから抽出したパターンを、未来的なビジュアルアートへと再構成。手法はアナログでありながら、結果はデジタルな流動性。</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-badge">02</div>
+          <div>
+            <span>05 / 2025</span>
+            <h3 style="margin: 0.2rem 0;">Aurora Chambers</h3>
+            <p>動きのある光のチャンネルを通して、遠い星のようなエンベロープを再現。まるで四次元のカメラで撮影されたかのような空間。</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-badge">03</div>
+          <div>
+            <span>11 / 2025</span>
+            <h3 style="margin: 0.2rem 0;">Signal Bloom</h3>
+            <p>集めた反応をビジュアルの花火に変換。パターンはいつでもリセットされ、見るたびに新たな発見が生まれます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2>あなたの物語を刻む限定空間</h2>
+      <p>レイヤーが重なり合うたびに、ページは生き物のように息をする。あなたが次の訪問者であり、次の章の作者です。</p>
+      <div class="hero-actions">
+        <button class="btn primary">カスタム体験をリクエスト</button>
+        <button class="btn secondary">サウンドプレビュー</button>
+      </div>
+    </section>
   </div>
+  <div class="orb" aria-hidden="true"></div>
+  <script>
+    const orb = document.querySelector(".orb");
+    const page = document.querySelector(".page");
+    document.addEventListener("pointermove", (event) => {
+      orb.style.left = `${event.clientX}px`;
+      orb.style.top = `${event.clientY}px`;
+    });
+    document.addEventListener("pointerleave", () => {
+      orb.style.opacity = "0";
+    });
+    document.addEventListener("pointerenter", () => {
+      orb.style.opacity = "1";
+    });
+  </script>
 </body>
 </html>
