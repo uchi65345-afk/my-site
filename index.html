@@ -13,7 +13,7 @@
   <div class="page">
     <header>
       <div class="eyebrow">Nova Vista</div>
-      <h1>Tomorrow’s showcase, crafted tonight.</h1>
+      <h1>Tomorrow’s calm horizon.</h1>
       <p class="hero-subtitle">光と影の狭間を旅するインタラクティブなスペース。唯一無二の世界観を、スクロールするたびに感じてください。</p>
       <div class="hero-actions">
         <button class="btn primary" id="start-experience">体験を始める</button>
@@ -149,7 +149,10 @@
     }
 
     startExperience?.addEventListener("click", openHealingMode);
-    overlayClose?.addEventListener("click", closeHealingMode);
+    overlayClose?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      closeHealingMode();
+    });
 
     document.addEventListener("pointermove", (event) => {
       orb.style.left = `${event.clientX}px`;
