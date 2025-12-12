@@ -16,8 +16,7 @@
       <h1>Tomorrow’s showcase, crafted tonight.</h1>
       <p class="hero-subtitle">光と影の狭間を旅するインタラクティブなスペース。唯一無二の世界観を、スクロールするたびに感じてください。</p>
       <div class="hero-actions">
-        <button class="btn primary">体験を始める</button>
-        <button class="btn secondary">コンセプトを見る</button>
+        <button class="btn primary" id="start-experience">体験を始める</button>
         <button class="btn tertiary" id="healing-toggle" aria-pressed="false">ヒーリングモード</button>
         <div class="status-pill">
           <span></span> ライブアップデート中
@@ -74,7 +73,6 @@
       <p>レイヤーが重なり合うたびに、ページは生き物のように息をする。あなたが次の訪問者であり、次の章の作者です。</p>
       <div class="hero-actions">
         <button class="btn primary">カスタム体験をリクエスト</button>
-        <button class="btn secondary">サウンドプレビュー</button>
       </div>
     </section>
   </div>
@@ -103,6 +101,7 @@
     const healingOverlay = document.querySelector(".healing-overlay");
     const breathPhase = document.querySelector("#breath-phase");
     const overlayClose = document.querySelector(".overlay-close");
+    const startExperience = document.querySelector("#start-experience");
     let healingActive = false;
     let breathingInterval = null;
 
@@ -141,7 +140,13 @@
       }
     }
 
+    function openHealingMode() {
+      if (healingActive) return;
+      toggleHealingMode();
+    }
+
     healingToggle?.addEventListener("click", toggleHealingMode);
+    startExperience?.addEventListener("click", openHealingMode);
     overlayClose?.addEventListener("click", toggleHealingMode);
 
     document.addEventListener("pointermove", (event) => {
