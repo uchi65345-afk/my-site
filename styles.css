@@ -142,6 +142,10 @@ body::before {
   box-shadow: 0 30px 60px rgba(2, 6, 23, 0.8);
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 .healing-label {
   margin: 0;
@@ -223,6 +227,22 @@ h1 {
   color: #e0e7ff;
   border: 1px solid rgba(255, 255, 255, 0.15);
   animation: none;
+}
+.overlay-close {
+  border-radius: 999px;
+  padding: 0.75rem 1.8rem;
+  border: 1px solid rgba(59, 130, 246, 0.6);
+  background: rgba(59, 130, 246, 0.12);
+  color: #e0f2ff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.overlay-close:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(14, 165, 233, 0.35);
 }
 .btn:hover {
   transform: translateY(-2px);

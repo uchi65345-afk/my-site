@@ -88,19 +88,21 @@
     <span class="meteor" style="--delay:0.8s; --duration:4.8s; --start:85%;"></span>
   </div>
   <div class="orb" aria-hidden="true"></div>
-  <div class="healing-overlay" role="status" aria-live="polite">
-    <div class="healing-content">
-      <p class="healing-label">呼吸に集中して、ページのリズムを身体に落とし込んでください。</p>
-      <p class="healing-countdown" id="breath-phase">息を吸って…</p>
-      <div class="healing-halo" aria-hidden="true"></div>
+    <div class="healing-overlay" role="status" aria-live="polite">
+      <div class="healing-content">
+        <p class="healing-label">呼吸に集中して、ページのリズムを身体に落とし込んでください。</p>
+        <p class="healing-countdown" id="breath-phase">息を吸って…</p>
+        <div class="healing-halo" aria-hidden="true"></div>
+        <button class="btn overlay-close" type="button" aria-label="ヒーリングモードを閉じる">閉じる</button>
+      </div>
     </div>
-  </div>
   <script>
     const orb = document.querySelector(".orb");
     const page = document.querySelector(".page");
     const healingToggle = document.querySelector("#healing-toggle");
     const healingOverlay = document.querySelector(".healing-overlay");
     const breathPhase = document.querySelector("#breath-phase");
+    const overlayClose = document.querySelector(".overlay-close");
     let healingActive = false;
     let breathingInterval = null;
 
@@ -140,6 +142,7 @@
     }
 
     healingToggle?.addEventListener("click", toggleHealingMode);
+    overlayClose?.addEventListener("click", toggleHealingMode);
 
     document.addEventListener("pointermove", (event) => {
       orb.style.left = `${event.clientX}px`;
