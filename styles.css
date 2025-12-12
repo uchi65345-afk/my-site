@@ -116,6 +116,52 @@ body::before {
   mix-blend-mode: screen;
   z-index: 1;
 }
+.healing-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.75);
+  backdrop-filter: blur(22px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+}
+.healing-overlay.active {
+  opacity: 1;
+}
+.healing-content {
+  text-align: center;
+  max-width: 420px;
+  padding: 2rem;
+  border-radius: 28px;
+  border: 1px solid rgba(226, 232, 240, 0.4);
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15), rgba(2, 6, 23, 0.9));
+  box-shadow: 0 30px 60px rgba(2, 6, 23, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+.healing-label {
+  margin: 0;
+  font-size: 1rem;
+  color: rgba(226, 232, 240, 0.8);
+}
+.healing-countdown {
+  margin: 1rem 0 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.healing-halo {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.6), transparent 60%);
+  filter: blur(12px);
+  animation: healingPulse 6s ease-in-out infinite;
+  pointer-events: none;
+}
 header {
   display: flex;
   flex-direction: column;
@@ -171,6 +217,12 @@ h1 {
   background: transparent;
   color: #e0e7ff;
   border: 1px solid rgba(224, 231, 255, 0.5);
+}
+.btn.tertiary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e0e7ff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  animation: none;
 }
 .btn:hover {
   transform: translateY(-2px);
@@ -367,5 +419,19 @@ h1 {
   }
   50% {
     transform: translateY(-2px);
+  }
+}
+@keyframes healingPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.45;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
   }
 }

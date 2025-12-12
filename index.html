@@ -18,6 +18,7 @@
       <div class="hero-actions">
         <button class="btn primary">体験を始める</button>
         <button class="btn secondary">コンセプトを見る</button>
+        <button class="btn tertiary" id="healing-toggle" aria-pressed="false">ヒーリングモード</button>
         <div class="status-pill">
           <span></span> ライブアップデート中
         </div>
@@ -87,9 +88,59 @@
     <span class="meteor" style="--delay:0.8s; --duration:4.8s; --start:85%;"></span>
   </div>
   <div class="orb" aria-hidden="true"></div>
+  <div class="healing-overlay" role="status" aria-live="polite">
+    <div class="healing-content">
+      <p class="healing-label">呼吸に集中して、ページのリズムを身体に落とし込んでください。</p>
+      <p class="healing-countdown" id="breath-phase">息を吸って…</p>
+      <div class="healing-halo" aria-hidden="true"></div>
+    </div>
+  </div>
   <script>
     const orb = document.querySelector(".orb");
     const page = document.querySelector(".page");
+    const healingToggle = document.querySelector("#healing-toggle");
+    const healingOverlay = document.querySelector(".healing-overlay");
+    const breathPhase = document.querySelector("#breath-phase");
+    let healingActive = false;
+    let breathingInterval = null;
+
+    function updateBreathingPhase(label) {
+      if (breathPhase) breathPhase.textContent = label;
+    }
+
+    function cycleBreathing() {
+      const sequence = [
+        "息を吸って、光を満たす。",
+        "静かに止めて、熱を巡らせる。",
+        "ゆっくり吐いて、緊張をほどく。",
+        "呼吸を整え、感覚をリセット。"
+      ];
+      let index = 0;
+      updateBreathingPhase(sequence[index]);
+      breathingInterval = setInterval(() => {
+        index = (index + 1) % sequence.length;
+        updateBreathingPhase(sequence[index]);
+      }, 3600);
+    }
+
+    function toggleHealingMode() {
+      if (!healingOverlay || !healingToggle) return;
+      healingActive = !healingActive;
+      healingToggle.setAttribute("aria-pressed", healingActive.toString());
+      healingToggle.textContent = healingActive ? "モードを閉じる" : "ヒーリングモード";
+      healingOverlay.classList.toggle("active", healingActive);
+
+      if (healingActive) {
+        cycleBreathing();
+      } else {
+        clearInterval(breathingInterval);
+        breathingInterval = null;
+        updateBreathingPhase("息を吸って…");
+      }
+    }
+
+    healingToggle?.addEventListener("click", toggleHealingMode);
+
     document.addEventListener("pointermove", (event) => {
       orb.style.left = `${event.clientX}px`;
       orb.style.top = `${event.clientY}px`;
