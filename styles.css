@@ -29,6 +29,39 @@ body::before {
   z-index: -2;
   animation: pulse 12s ease-in-out infinite;
 }
+.meteor-shower {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.meteor {
+  position: absolute;
+  top: -30%;
+  left: var(--start, 10%);
+  width: 2px;
+  height: 150px;
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0), rgba(248, 250, 252, 0.8), rgba(248, 250, 252, 0));
+  transform-origin: top left;
+  transform: rotate(25deg);
+  animation: meteorTrail var(--duration, 4s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  opacity: 0;
+  filter: blur(0.5px);
+}
+.meteor::after {
+  content: "";
+  position: absolute;
+  top: 90%;
+  left: -2.5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(248, 250, 252, 0.9);
+  filter: blur(1px);
+  box-shadow: 0 0 20px rgba(248, 250, 252, 0.6);
+}
 @keyframes backgroundFade {
   from {
     opacity: 0.4;
@@ -302,6 +335,22 @@ h1 {
   }
   50% {
     box-shadow: 0 0 20px rgba(14, 165, 233, 0.9);
+  }
+}
+@keyframes meteorTrail {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(25deg) scaleY(0.4);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(120vw, 120vh, 0) rotate(25deg) scaleY(0.4);
   }
 }
 @keyframes glowPulse {
